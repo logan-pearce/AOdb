@@ -13,7 +13,7 @@ st.set_page_config(
         layout="wide",
     )
 
-st.title('Database of Bright Single Stars for AO Engineering')
+st.title('Database of Bright Single Stars for AO Engineering at Las Campanas')
 
 import sqlite3
 import pandas as pd
@@ -26,7 +26,7 @@ conn = st.connection('aodb', type='sql', url = "sqlite:///aodb.db")
 def querySQL(string):
     session_state['db'] = conn.query(string)
     st.dataframe(session_state['db'])
-
+""" ###  :sparkles: Comming soon :sparkles:"""
 st.text_input(r"$\textsf{\Large SQL Query String}$", key='sqlquerystring')
 session_state['db'] = aodb
 #session_state

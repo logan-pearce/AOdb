@@ -12,13 +12,18 @@ st.title('Database of Bright Single Stars for AO Engineering')
 
 st.markdown(
     """
-    SLSdb is an interactive database of all known Sirius-Like Systems -- white dwarfs with non-interacting main sequence star companions of spectral type earlier than M. View the Tutorials page for how to interact with the db; the Derivation page walks through how we adapted multiple catalogs into the db.
+    This is an interactive compilation of bright stars spanning all RAs and DECs near overhead at LCO. The Derivation page explains how the stars were selected.  
+    The 'Num' column corresponds to the index that will be in the TCS catalog.  The plot below the db shows the stars, hover over each point to see information including index, name, RA, and magnitudes.  Click "Generate TCS Catalog" to download the full catalog in the correct TCS format.
+
+    The "CreateTCSCat" page lets you create TCS catalogs of objects providing just the Simbad names.  Supply a list of Simbad-resolvable names and download a TCS catalog for those objects.
 
 ### Contibuting
-To contribute to slsdb please email Logan Pearce at lapearce@umich.edu
+To update the catalog please email Logan Pearce at lapearce@umich.edu
 
 ### Future Upgrades
- - Allow users to submit new SLS
+ - Allow SQL queries of database to downselect and produce a new TCS catalog
+ - Allow users to update the database in real time
+
 
 """
 )
