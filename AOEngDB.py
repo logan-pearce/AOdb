@@ -115,7 +115,7 @@ data=ColumnDataSource(data=datadf)
 #                         #low_color=Magma256[150], high_color=Magma256[200]
 #                         )
 
-tools = "hover, home, zoom_in, zoom_out, box_zoom, save, undo, redo, pan"
+tools = "hover, zoom_in, zoom_out, box_zoom, save, undo, redo, pan"
 tooltips = [
         ('Num', '@Index'),
         ('Name', '@Name'),
