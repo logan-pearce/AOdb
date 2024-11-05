@@ -26,8 +26,8 @@ conn = st.connection('aodb', type='sql', url = "sqlite:///aodb.db")
 def querySQL(string):
     session_state['db'] = conn.query(string)
     st.dataframe(session_state['db'])
-""" ###  :sparkles: Comming soon :sparkles:"""
-st.text_input(r"$\textsf{\Large SQL Query String}$", key='sqlquerystring')
+""" ###  """
+st.text_input(r"$\textsf{\Large SQL Query String  Coming soon}$", key='sqlquerystring')
 session_state['db'] = aodb
 #session_state
 if session_state['sqlquerystring'] == '':
