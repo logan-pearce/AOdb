@@ -161,23 +161,22 @@ st.bokeh_chart(p, use_container_width=True)
 
 '''## Update database
 
-I'm currently working on a way for users to update the database in real time, but for now if you observe a star and 
-find that it's a multiple, please email me at lapearce@umich.edu (or on slack) with the star(s) name and number of components
+I'm currently working on a way for users to update the database in real time, but for now if you observe a star and find that it's a multiple, please email me at lapearce@umich.edu (or on slack) with the star(s) name and number of components
  '''
 
 
 # ''' ## Update Database'''
 
-with st.form("update"):
-    left_co, cent_co,last_co = st.columns(3)
-    with left_co:
-        name = st.text_input(r"Simbad Name", key='name')
-    with cent_co:
-        N_sys = st.text_input(r"N components", key='n_sys')
-    with last_co:
-        vetted = st.text_input(r"Vetted", key='vetted')
-    drop = st.checkbox("Drop from db?")
-    submit = st.form_submit_button('Update')
+# with st.form("update"):
+#     left_co, cent_co,last_co = st.columns(3)
+#     with left_co:
+#         name = st.text_input(r"Simbad Name", key='name')
+#     with cent_co:
+#         N_sys = st.text_input(r"N components", key='n_sys')
+#     with last_co:
+#         vetted = st.text_input(r"Vetted", key='vetted')
+#     drop = st.checkbox("Drop from db?")
+#     submit = st.form_submit_button('Update')
 
 # if submit:
 #     sqlstring = "UPDATE aodb SET n_sys = "+N_sys+" WHERE simbad_name LIKE '%"+name+"%'"
