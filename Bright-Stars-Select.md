@@ -231,15 +231,15 @@ https://gaia-dpci.github.io/GaiaXPy-website/tutorials.html
 # Download the query results
 
 
-![pic1](pic1.png)
+![pic1](images/pic1.png)
 
 # And the continuous spectra:
 
-![pic2](pic2.png)
+![pic2](images/pic2.png)
 
 # And the sampled spectra:
 
-![pic3](pic3.png)
+![pic3](images/pic3.png)
 
 ### These files (and this notebook) are included in the Github repo for this app to enable reproducing this catalog.
 
@@ -623,7 +623,7 @@ plt.grid(ls=':')
 
 
     
-![png](output_9_0.png)
+![png](images/output_9_0.png)
     
 
 
@@ -1100,7 +1100,7 @@ plt.tight_layout()
 
 
     
-![png](output_32_0.png)
+![png](images/output_32_0.png)
     
 
 
@@ -2455,7 +2455,7 @@ plt.grid(ls=':')
 
 
     
-![png](output_60_0.png)
+![png](images/output_60_0.png)
     
 
 
