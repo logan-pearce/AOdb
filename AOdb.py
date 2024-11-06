@@ -166,11 +166,6 @@ find that it's a multiple, please email me at lapearce@umich.edu (or on slack) w
  '''
 
 
-
-
-    
-    
-
 # ''' ## Update Database'''
 
 with st.form("update"):
@@ -188,15 +183,15 @@ with st.form("update"):
 #     sqlstring = "UPDATE aodb SET n_sys = "+N_sys+" WHERE simbad_name LIKE '%"+name+"%'"
 #     querySQL(sqlstring)
 
-from sqlalchemy import update
-if submit:
-    sqlstring = "UPDATE aodb SET n_sys = "+N_sys+" WHERE simbad_name LIKE '%"+name+"%'"
-    with engine.connect() as conn:
-        result = conn.execute(text(sqlstring))
+# from sqlalchemy import update
+# if submit:
+#     sqlstring = "UPDATE aodb SET n_sys = "+N_sys+" WHERE simbad_name LIKE '%"+name+"%'"
+#     with engine.connect() as conn:
+#         result = conn.execute(text(sqlstring))
 
-    session_state['db'] = pd.DataFrame(result)
+#     session_state['db'] = pd.DataFrame(result)
 
-session_state['db']
+# session_state['db']
 
 
 
