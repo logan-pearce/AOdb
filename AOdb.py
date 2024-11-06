@@ -2,50 +2,58 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 from bokeh.plotting import figure
+from bokeh.io import curdoc
 from bokeh.palettes import Magma256, Viridis256
 import sqlite3
 from streamlit import session_state
 import astropy.units as u
 
 st.set_page_config(
-        page_title="AOEngDB",
+        page_title="AOdb",
         page_icon="",
         layout="wide",
     )
 
-st.title('Database of Bright Single Stars for AO Engineering at Las Campanas')
+st.title('Database of Bright Single Stars for AO Engineering from Las Campanas')
 
 import sqlite3
 import pandas as pd
 
 aodb = pd.read_csv('Bright-AO-Stars.csv')
 
-### SQL interface:
-conn = st.connection('aodb', type='sql', url = "sqlite:///aodb.db")
-#conn = st.connection("aodb")
+#aodb = pd.read_csv('aodb.csv')
+
+
+import sqlite3
+from sqlalchemy import create_engine, text
+conn = sqlite3.connect('aodb.db')
+engine = create_engine("sqlite:///aodb.db")
+aodb.to_sql(name = 'aodb', con=engine, index=False, if_exists='replace')
+
+
 def querySQL(string):
-    session_state['db'] = conn.query(string)
-    st.dataframe(session_state['db'])
-""" ###  """
-st.text_input(r"$\textsf{\Large SQL Query String  Coming soon}$", key='sqlquerystring')
+    with engine.connect() as conn:
+        result = conn.execute(text(string)).fetchall()
+        session_state['db'] = pd.DataFrame(result)
+        st.dataframe(session_state['db'])
+
+st.text_input(r"$\textsf{\Large SQL Query String}$", key='sqlquerystring')
+
 session_state['db'] = aodb
+
 #session_state
 if session_state['sqlquerystring'] == '':
     session_state['db'] = aodb
     st.dataframe(session_state['db'])
 else:
-    st.write(session_state['sqlquerystring'])
     with st.form(key="aodbsql"):
         st.form_submit_button('Query', on_click=querySQL(session_state['sqlquerystring']))
 
 
 
 
-
-
-
-
 def GenerateCat(dataframe):
+
     pdcat = dataframe.copy()
     #pdcat['RA deg'],pdcat['Dec deg'] = np.nan,np.nan
     pdcat['pmra s/yr'], pdcat['pmdec arcsec/yr'] = np.nan, np.nan
@@ -88,7 +96,8 @@ def GenerateCat(dataframe):
     return pdcat_out
 
 
-st.download_button(label='Generate TCS catalog', data=GenerateCat(session_state['db']), file_name='Bright-AO-Stars.cat')
+filename = st.text_input('TCS Cat Filename', 'Bright-AO-Stars.cat')
+st.download_button(label='Generate TCS catalog', data=GenerateCat(session_state['db']), file_name=filename)
 
 
 
@@ -115,7 +124,7 @@ data=ColumnDataSource(data=datadf)
 #                         #low_color=Magma256[150], high_color=Magma256[200]
 #                         )
 
-tools = "hover, zoom_in, zoom_out, box_zoom, save, undo, redo, pan"
+tools = "hover, zoom_in, zoom_out, save, undo, redo, pan"
 tooltips = [
         ('Num', '@Index'),
         ('Name', '@Name'),
@@ -156,34 +165,38 @@ I'm currently working on a way for users to update the database in real time, bu
 find that it's a multiple, please email me at lapearce@umich.edu (or on slack) with the star(s) name and number of components
  '''
 
-# def get_index(name):
-#     ind = [i for i in range(len(session_state['db'])) if name in session_state['db'].loc[i,'simbad_name']]
-#     return ind
 
-# def update(index, N_sys, vetted, drop):
-#     session_state['db'].loc[index, 'n_sys'] = N_sys
-#     session_state['db'].loc[index, 'vetted'] = vetted
-#     if drop:
-#         session_state['db'] = session_state['db'].drop(index=[index])
-#     st.rerun()
+
+
     
     
 
 # ''' ## Update Database'''
 
-# with st.form("update"):
-#     left_co, cent_co,last_co = st.columns(3)
-#     with left_co:
-#         index = st.text_input(r"Index", key='index')
-#     with cent_co:
-#         N_sys = st.text_input(r"N components", key='n_sys')
-#     with last_co:
-#         vetted = st.text_input(r"Vetted", key='vetted')
-#     drop = st.checkbox("Drop from db?")
+with st.form("update"):
+    left_co, cent_co,last_co = st.columns(3)
+    with left_co:
+        name = st.text_input(r"Simbad Name", key='name')
+    with cent_co:
+        N_sys = st.text_input(r"N components", key='n_sys')
+    with last_co:
+        vetted = st.text_input(r"Vetted", key='vetted')
+    drop = st.checkbox("Drop from db?")
+    submit = st.form_submit_button('Update')
 
-#     # Every form must have a submit button.
-#     st.form_submit_button('Update', on_click=update(session_state['index'],
-#                                                    session_state['N_sys'],
-#                                                    session_state['vetted'],
-#                                                    session_state['drop']))
+# if submit:
+#     sqlstring = "UPDATE aodb SET n_sys = "+N_sys+" WHERE simbad_name LIKE '%"+name+"%'"
+#     querySQL(sqlstring)
+
+from sqlalchemy import update
+if submit:
+    sqlstring = "UPDATE aodb SET n_sys = "+N_sys+" WHERE simbad_name LIKE '%"+name+"%'"
+    with engine.connect() as conn:
+        result = conn.execute(text(sqlstring))
+
+    session_state['db'] = pd.DataFrame(result)
+
+session_state['db']
+
+
 
