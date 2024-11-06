@@ -6,5 +6,5 @@ import streamlit as st
 def read_markdown_file(markdown_file):
     return Path(markdown_file).read_text()
 
-intro_markdown = read_markdown_file("derivation-files/Bright-Stars-Select.md")
+intro_markdown = read_markdown_file("Bright-Stars-Select.md")
 st.markdown(intro_markdown, unsafe_allow_html=True)
