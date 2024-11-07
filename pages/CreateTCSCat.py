@@ -42,7 +42,8 @@ def doit(Names, filename):
     pdcat = pd.DataFrame(data={'Name':Names[0]}, index=[0])
     for i in range(1,len(Names)):
         data = {'Name':Names[i]}
-        pdcat = pdcat.append(data,ignore_index=True)
+        #pdcat = pdcat.append(data,ignore_index=True)
+        pdcat = pd.concat([pdcat,data],ignore_index=True)
         
 
     pdcat['RA'], pdcat['DEC'], pdcat['pmra'], pdcat['pmdec'] = np.nan,np.nan,np.nan,np.nan
