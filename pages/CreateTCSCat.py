@@ -41,7 +41,7 @@ def doit(Names, filename):
 
     pdcat = pd.DataFrame(data={'Name':Names[0]}, index=[0])
     for i in range(1,len(Names)):
-        data = {'Name':Names[i]}
+        data = pd.Series({'Name':Names[i]})
         #pdcat = pdcat.append(data,ignore_index=True)
         pdcat = pd.concat([pdcat,data],ignore_index=True)
         
