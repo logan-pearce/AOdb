@@ -8,6 +8,9 @@ st.set_page_config(
         layout="wide",
     )
 
+sidebar_logo = 'images/Starcutout.png'
+st.logo(sidebar_logo, size='large')
+
 st.title('Database of Bright Single Stars for AO Engineering at Las Campanas')
 
 st.markdown(
@@ -36,3 +39,4 @@ strg = "SELECT * FROM aodb WHERE ra < 180 and ra > 50"
 st.code(strg, language="sql")
 '''Note: in order to generate a TCS catalog from this sql query, you must select all columns (*)'''
 
+"""Written by Logan Pearce, 2024"""

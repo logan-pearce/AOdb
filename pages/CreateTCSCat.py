@@ -14,6 +14,9 @@ st.set_page_config(
         layout="wide",
     )
 
+sidebar_logo = 'images/Starcutout.png'
+st.logo(sidebar_logo, size='large')
+
 
 '''
 ### targets_into_TCScat.py

@@ -9,6 +9,9 @@ st.set_page_config(
         layout="wide",
     )
 
+sidebar_logo = 'images/Starcutout.png'
+st.logo(sidebar_logo, size='large')
+
 def read_markdown_file(markdown_file):
     return Path(markdown_file).read_text()
 
