@@ -6,12 +6,11 @@ import astropy.units as u
 from astroquery.simbad import Simbad
 import astropy.units as u
 from streamlit import session_state
-# import warnings
-# warnings.filterwarnings('ignore')
+from io import StringIO
 
 st.set_page_config(
         page_title="Create TCS Cat",
-        page_icon="",
+        page_icon="images/Starcutout.png",
         layout="wide",
     )
 
@@ -23,7 +22,7 @@ Supply a list of Simbad-resolvable target names and produce a catalog for LCO TC
 
 To run:
 
-Names: Enter list of Simbad-resolvable names with quotes around each. Ex: 'alf Sco', 'HD 214810A', 'HD 218434'
+Names: Either enter list of Simbad-resolvable names with quotes around each. Ex: 'alf Sco', 'HD 214810A', 'HD 218434' or upload a text file of the list with quotes aroudn each.
 
 Filename: Enter filename to save catalog as. Cat will save as "filename.cat" to your local downloads folder.
 
@@ -38,12 +37,13 @@ def doit(Names, filename):
     Names = Names.split(',')
     Names = [Names[i].replace("'","") for i in range(len(Names))]
     Names = [Names[i].replace("*","") for i in range(len(Names))]
+    Names = [Names[i].replace("\n","") for i in range(len(Names))]
 
-    pdcat = pd.DataFrame(data={'Name':Names[0]}, index=[0])
-    for i in range(1,len(Names)):
-        data = pd.Series({'Name':Names[i]})
-        #pdcat = pdcat.append(data,ignore_index=True)
-        pdcat = pd.concat([pdcat,data],ignore_index=True)
+    pdcat = pd.DataFrame(data={'Name':Names})
+    # for i in range(1,len(Names)):
+    #     data = pd.Series({'Name':Names[i]})
+    #     #pdcat = pdcat.append(data,ignore_index=True)
+    #     pdcat = pd.concat([pdcat,data],ignore_index=True, axis=1)
         
 
     pdcat['RA'], pdcat['DEC'], pdcat['pmra'], pdcat['pmdec'] = np.nan,np.nan,np.nan,np.nan
@@ -97,9 +97,18 @@ def doit(Names, filename):
     pdcat_out = pdcat_out.to_csv(index=False, sep='\t')
     return pdcat_out
     
+left_co, right_co = st.columns(2)
+with left_co:
+    Names = st.text_input(r"$\textsf{\Large Names}$", key='names')
+with right_co:
+    uploaded_file = st.file_uploader(r"$\textsf{\Large Upload List or Names}$")
+    if uploaded_file is not None:
+    # To convert to a string based IO:
+        stringio = StringIO(uploaded_file.getvalue().decode("utf-8"))
+        # To read file as string:
+        Names = stringio.read()
+        st.write(Names)
 
-session_state['download'] = False
-Names = st.text_input(r"$\textsf{\Large Names}$", key='names')
 filename = st.text_input(r"$\textsf{\Large Filename}$", key='filename')
 
 if st.button(r"$\textsf{\Large Generate TCS Catalog}$"):

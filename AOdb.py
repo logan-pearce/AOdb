@@ -10,9 +10,16 @@ import astropy.units as u
 
 st.set_page_config(
         page_title="AOdb",
-        page_icon="",
+        page_icon="images/Starcutout.png",
         layout="wide",
     )
+
+sidebar_logo = 'images/Starcutout.png'
+st.logo(sidebar_logo, size='large')
+
+left_co, cent_co,last_co = st.columns(3)
+with cent_co:
+    st.image('images/logo.png', width=300)
 
 st.title('Database of Bright Single Stars for AO Engineering from Las Campanas')
 
