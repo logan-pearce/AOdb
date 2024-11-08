@@ -3,6 +3,12 @@ import streamlit as st
 from pathlib import Path
 import streamlit as st
 
+st.set_page_config(
+        page_title="AOdb",
+        page_icon="images/Starcutout.png",
+        layout="wide",
+    )
+
 def read_markdown_file(markdown_file):
     return Path(markdown_file).read_text()
 
