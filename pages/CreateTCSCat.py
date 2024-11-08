@@ -22,9 +22,18 @@ Supply a list of Simbad-resolvable target names and produce a catalog for LCO TC
 
 To run:
 
-Names: Either enter list of Simbad-resolvable names with quotes around each. Ex: 'alf Sco', 'HD 214810A', 'HD 218434' or upload a text file of the list with quotes aroudn each.
+#### *Names*: 
+Enter list of Simbad-resolvable names with quotes around each in text box. Ex: 'alf Sco', 'HD 214810A', 'HD 218434' 
 
-Filename: Enter filename to save catalog as. Cat will save as "filename.cat" to your local downloads folder.
+#### OR 
+
+Upload a text file of the list with quotes around each. '''
+with open('images/Example-catalog-entry') as f:
+    st.download_button('Download example entry file',f)
+'''
+
+#### *Filename*: 
+Enter filename to save catalog as. Cat will save as "filename.cat" to your local downloads folder.
 
 Dependencies:
 astropy, astroquery, numpy, pandas
