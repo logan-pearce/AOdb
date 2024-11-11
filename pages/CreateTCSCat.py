@@ -113,7 +113,7 @@ left_co, right_co = st.columns(2)
 with left_co:
     Names = st.text_input(r"$\textsf{\Large Names}$", key='names')
 with right_co:
-    uploaded_file = st.file_uploader(r"$\textsf{\Large Upload List or Names}$")
+    uploaded_file = st.file_uploader(r"$\textsf{\Large Upload List of Names}$")
     if uploaded_file is not None:
     # To convert to a string based IO:
         stringio = StringIO(uploaded_file.getvalue().decode("utf-8"))
