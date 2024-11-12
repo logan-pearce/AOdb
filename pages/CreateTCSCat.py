@@ -26,7 +26,7 @@ Supply a list of Simbad-resolvable target names and produce a catalog for LCO TC
 To run:
 
 #### *Names*: 
-Enter list of Simbad-resolvable names with quotes around each in text box. Ex: 'alf Sco', 'HD 214810A', 'HD 218434' 
+Enter list of Simbad-resolvable names separated by commas in text box. Ex: alf Sco, HD 214810A, HD 218434
 
 #### OR 
 
