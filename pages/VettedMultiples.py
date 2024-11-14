@@ -11,7 +11,7 @@ st.set_page_config(
 sidebar_logo = 'images/Starcutout.png'
 st.logo(sidebar_logo, size='large')
 
-''' # In Memorium
+''' # In Memoriam
 ### To those bright star catalog members we lost along the way.
 '''
 
