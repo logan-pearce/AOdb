@@ -110,6 +110,16 @@ st.download_button(label='Generate TCS catalog', data=GenerateCat(session_state[
 
 
 ##################################### RA/DEC Plot::::
+import streamlit.components.v1 as components
+from bokeh.plotting import figure, save
+from bokeh.io import output_file
+def use_file_for_bokeh(chart: figure, chart_height=1000):
+    output_file('bokeh_graph.html')
+    save(chart)
+    with open("bokeh_graph.html", 'r', encoding='utf-8') as f:
+        html = f.read()
+    components.html(html, height=chart_height)
+
 from bokeh.models import LinearColorMapper, ColumnDataSource, LinearInterpolator, ColorBar, Label
 from bokeh.transform import linear_cmap, log_cmap
 multiplier = 100
@@ -160,7 +170,10 @@ p.circle('plotx','ploty', source=data, fill_alpha=0.6, color="#EEEEEE", size=20)
 #                          title_text_color = "#EEEEEE")
 # p.add_layout(color_bar, 'right')
 #st.text('Marker size corresponds to MS g magnitude; marker color corresponds to distance')
-st.bokeh_chart(p, use_container_width=True)
+st.bokeh_chart = use_file_for_bokeh
+# st.bokeh_chart(p, use_container_width=True)
+st.bokeh_chart(p)
+
 
 
 
