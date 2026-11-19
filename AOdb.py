@@ -84,7 +84,9 @@ def GenerateCat(dataframe):
         pdcat.loc[i,'pmdec arcsec/yr'] = a
 
     pdcat['num'] = np.arange(1,len(pdcat)+1,1)
-    pdcat['Name'] = pdcat['simbad_name']
+    names = pdcat['simbad_name']
+    names = [name.replace(' ', '') for name in names]
+    pdcat['Name'] = names
 
     pdcat_out = pdcat[['num','Name']]
     pdcat_out['ra'] = pdcat['ra_hms']
