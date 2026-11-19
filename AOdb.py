@@ -85,7 +85,7 @@ def GenerateCat(dataframe):
 
     pdcat['num'] = np.arange(1,len(pdcat)+1,1)
     names = pdcat['simbad_name']
-    names = [name.replace(' ', '') for name in str(names)]
+    names = [str(name).replace(' ', '') for name in names]
     pdcat['Name'] = names
 
     pdcat_out = pdcat[['num','Name']]
